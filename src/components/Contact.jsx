@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Mail, Phone, Send } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from './BrandIcons';
-import { useAdmin } from '../context/AdminContext';
+import { useAdmin, apiUrl } from '../context/AdminContext';
 import InlineEdit from './InlineEdit';
 import InlineFieldEditor from './InlineFieldEditor';
+import EmailSubscription from './EmailSubscription';
 import './Contact.css';
 
 const Contact = () => {
@@ -18,6 +19,7 @@ const Contact = () => {
     message: ''
   });
   const [formStatus, setFormStatus] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSave = async (data) => {
     await updateSection('contact', data);
@@ -28,24 +30,32 @@ const Contact = () => {
     setFormStatus('');
   };
 
-  const handleMessageSubmit = (e) => {
+  const handleMessageSubmit = async (e) => {
     e.preventDefault();
 
-    if (!contact.email) {
-      setFormStatus('Please add a contact email from admin mode first.');
-      return;
+    setIsSubmitting(true);
+    setFormStatus('Sending message...');
+
+    try {
+      const response = await fetch(apiUrl('/api/notify/contact'), {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(messageForm)
+      });
+
+      const data = await response.json();
+      
+      if (response.ok) {
+        setFormStatus('Message sent successfully!');
+        setMessageForm({ name: '', email: '', subject: '', message: '' });
+      } else {
+        setFormStatus(data.message || data.errors?.[0]?.msg || 'Failed to send message.');
+      }
+    } catch (err) {
+      setFormStatus('Network error. Please try again later.');
+    } finally {
+      setIsSubmitting(false);
     }
-
-    const body = [
-      `Name: ${messageForm.name}`,
-      `Email: ${messageForm.email}`,
-      '',
-      messageForm.message
-    ].join('\n');
-
-    const mailto = `mailto:${contact.email}?subject=${encodeURIComponent(messageForm.subject)}&body=${encodeURIComponent(body)}`;
-    window.location.href = mailto;
-    setFormStatus('Opening your email app...');
   };
 
   const content = (
@@ -115,6 +125,7 @@ const Contact = () => {
           ) : (
             content
           )}
+          <EmailSubscription />
         </div>
 
         {/* Right Column: Contact Form */}
@@ -147,8 +158,8 @@ const Contact = () => {
                 <p className={contact.email ? 'contact-message-status success' : 'contact-message-status error'}>{formStatus}</p>
               )}
 
-              <button className="btn-primary contact-message-submit" type="submit">
-                <Send size={18} /> Send Message
+              <button className="btn-primary contact-message-submit" type="submit" disabled={isSubmitting}>
+                <Send size={18} /> {isSubmitting ? 'Sending...' : 'Send Message'}
               </button>
             </form>
           </div>

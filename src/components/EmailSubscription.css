@@ -1,0 +1,96 @@
+.email-subscription-card {
+  padding: 24px;
+  margin-top: 32px;
+  border-radius: 12px;
+  text-align: left;
+}
+
+.subscription-content h3 {
+  font-size: 1.25rem;
+  margin-bottom: 8px;
+  color: var(--heading-color);
+}
+
+.subscription-content p {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+
+.subscription-form .input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.subscription-form .input-icon {
+  position: absolute;
+  left: 12px;
+  color: var(--text-soft);
+}
+
+.subscription-form input {
+  width: 100%;
+  padding: 12px 48px 12px 40px;
+  border-radius: 8px;
+  border: 1px solid var(--glass-border);
+  background: rgba(0, 0, 0, 0.2);
+  color: var(--text-dark);
+  font-family: inherit;
+  font-size: 0.95rem;
+  outline: none;
+  transition: all 0.2s;
+}
+
+[data-theme='light'] .subscription-form input {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.subscription-form input:focus {
+  border-color: var(--primary-accent);
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.subscribe-btn {
+  position: absolute;
+  right: 6px;
+  background: var(--primary-accent);
+  color: #11150f;
+  border: none;
+  border-radius: 6px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+.subscribe-btn:hover:not(:disabled) {
+  opacity: 0.9;
+  transform: scale(1.05);
+}
+
+.subscribe-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.status-msg {
+  font-size: 0.85rem;
+  margin-top: 12px;
+  font-weight: 500;
+}
+
+.status-msg.success { color: #34c759; }
+.status-msg.error { color: #ff3b30; }

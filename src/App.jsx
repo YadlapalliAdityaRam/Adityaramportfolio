@@ -17,7 +17,7 @@ import Particles from './components/Particles';
 import DynamicPage from './pages/DynamicPage';
 import { SystemExperienceProvider, useSystemExperience } from './context/SystemExperienceContext';
 import SystemShutdownOverlay from './components/SystemShutdownOverlay';
-import { useAdmin } from './context/AdminContext';
+import { useAdmin, apiUrl } from './context/AdminContext';
 
 const backgrounds = {
   home: {
@@ -123,6 +123,27 @@ function PortfolioExperience() {
       img.src = url;
     });
   }, []);
+
+  // Notify visit when app boots up
+  useEffect(() => {
+    if (isBooted) {
+      const notifyVisit = async () => {
+        try {
+          await fetch(apiUrl('/api/notify/notify-visit'), {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              page: window.location.pathname || 'Home',
+              deviceInfo: navigator.userAgent
+            })
+          });
+        } catch (e) {
+          // Silent fail for analytics
+        }
+      };
+      notifyVisit();
+    }
+  }, [isBooted]);
 
   const renderContent = () => {
     if (activeTab.startsWith('dynamic_')) {

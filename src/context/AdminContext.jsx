@@ -6,8 +6,8 @@ const AdminContext = createContext();
 export const useAdmin = () => useContext(AdminContext);
 
 const API_ENABLED = import.meta.env.VITE_API_ENABLED === 'true';
-const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL || '').replace(/\/$/, '');
-const apiUrl = (path) => `${API_BASE_URL}${path}`;
+export const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL || '').replace(/\/$/, '');
+export const apiUrl = (path) => `${API_BASE_URL}${path}`;
 
 const DEFAULT_DATA = {
   hero: {
