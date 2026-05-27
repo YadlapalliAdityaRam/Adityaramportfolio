@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { Download, FileText, PencilLine, Upload } from 'lucide-react';
 import { useAdmin } from '../context/AdminContext';
+import { compressImage } from '../utils/imageCompressor';
 import InlineEdit from './InlineEdit';
 import InlineFieldEditor from './InlineFieldEditor';
 
@@ -16,19 +17,20 @@ const Resume = () => {
     await updateSection('resume', data);
   };
 
-  const handleResumeUpload = (e) => {
+  const handleResumeUpload = async (e) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    const reader = new FileReader();
-    reader.onloadend = async () => {
+    try {
+      const dataUrl = await compressImage(file);
       await updateSection('resume', {
         ...resume,
-        resumeUrl: reader.result,
+        resumeUrl: dataUrl,
         fileName: file.name
       });
-    };
-    reader.readAsDataURL(file);
+    } catch (err) {
+      console.error("Failed to process resume upload", err);
+    }
   };
 
   const skills = splitLines(resume.skills);

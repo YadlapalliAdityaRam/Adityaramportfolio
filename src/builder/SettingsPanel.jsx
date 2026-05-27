@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import { compressImage } from '../utils/imageCompressor';
 
 // ── Deep setter for nested paths like 'content.text' ────────
 const setDeep = (obj, path, val) => {
@@ -22,13 +23,16 @@ const Field = ({ label, value, path, onChange, type }) => {
   const isBoolean = typeof value === 'boolean';
   const isImage = type === 'image';
 
-  const handleImageFile = (e) => {
+  const handleImageFile = async (e) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    const reader = new FileReader();
-    reader.onloadend = () => onChange(path, reader.result);
-    reader.readAsDataURL(file);
+    try {
+      const dataUrl = await compressImage(file);
+      onChange(path, dataUrl);
+    } catch (err) {
+      console.error("Failed to process file", err);
+    }
   };
 
   if (isImage) {

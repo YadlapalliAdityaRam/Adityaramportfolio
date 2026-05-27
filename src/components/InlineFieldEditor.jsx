@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Check, Loader2, Upload } from 'lucide-react';
+import { compressImage } from '../utils/imageCompressor';
 import './InlineFieldEditor.css';
 
 /**
@@ -40,15 +41,16 @@ const InlineFieldEditor = ({ isOpen, onClose, onSave, title, initialData, fields
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleFileUpload = (name, e) => {
+  const handleFileUpload = async (name, e) => {
     const file = e.target.files[0];
     if (!file) return;
 
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      handleChange(name, reader.result); // Base64/data URL string
-    };
-    reader.readAsDataURL(file);
+    try {
+      const dataUrl = await compressImage(file);
+      handleChange(name, dataUrl);
+    } catch (err) {
+      console.error("Failed to process file", err);
+    }
   };
 
   const handleSave = async (e) => {
