@@ -1,0 +1,106 @@
+.contact-message-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 40px;
+  background:
+    linear-gradient(180deg, rgba(13, 19, 17, 0.78), rgba(9, 14, 13, 0.58)),
+    rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+.contact-message-title {
+  margin-bottom: 28px;
+  color: #ffffff;
+  font-weight: 650;
+  text-shadow: 0 6px 24px rgba(0, 0, 0, 0.58);
+}
+
+.contact-message-form {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.contact-message-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.contact-message-field span {
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 0.82rem;
+  font-weight: 650;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.42);
+}
+
+.contact-message-field input,
+.contact-message-field textarea {
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 12px;
+  background: rgba(5, 9, 8, 0.56);
+  color: #ffffff;
+  outline: none;
+  padding: 15px 16px;
+  font: inherit;
+  text-shadow: none;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 10px 28px rgba(0, 0, 0, 0.14);
+  transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.contact-message-field textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.contact-message-field input::placeholder,
+.contact-message-field textarea::placeholder {
+  color: rgba(255, 255, 255, 0.58);
+  opacity: 1;
+}
+
+.contact-message-field input:focus,
+.contact-message-field textarea:focus {
+  border-color: rgba(198, 169, 105, 0.74);
+  background: rgba(3, 8, 7, 0.72);
+  box-shadow:
+    0 0 0 3px rgba(198, 169, 105, 0.13),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 14px 32px rgba(0, 0, 0, 0.18);
+}
+
+.contact-message-field input:-webkit-autofill,
+.contact-message-field textarea:-webkit-autofill {
+  -webkit-text-fill-color: #ffffff;
+  transition: background-color 9999s ease-in-out 0s;
+}
+
+.contact-message-status {
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.42);
+}
+
+.contact-message-status.success {
+  color: #f1d990;
+}
+
+.contact-message-status.error {
+  color: #fecaca;
+}
+
+.contact-message-submit {
+  justify-content: center;
+  margin-top: auto;
+}
+
+@media (max-width: 768px) {
+  .contact-message-card {
+    padding: 28px;
+  }
+}

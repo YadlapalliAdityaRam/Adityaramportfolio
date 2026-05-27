@@ -1,0 +1,40 @@
+.project-card-description {
+  color: var(--text-muted);
+  flex: 1;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  margin-bottom: 16px;
+  max-height: 96px;
+  min-height: 72px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding-right: 8px;
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.42) rgba(255, 255, 255, 0.08);
+}
+
+.project-card-description::-webkit-scrollbar {
+  width: 6px;
+}
+
+.project-card-description::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+}
+
+.project-card-description::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.42);
+  border-radius: 999px;
+}
+
+.project-card-description::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.64);
+}
+
+@media (max-width: 768px) {
+  .project-card-description {
+    max-height: 120px;
+  }
+}

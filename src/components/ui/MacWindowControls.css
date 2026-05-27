@@ -1,0 +1,154 @@
+.mac-window-controls {
+  gap: 8px;
+  padding: 3px 4px;
+  flex: 0 0 auto;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.045);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.mac-control-wrap {
+  position: relative;
+  width: 14px;
+  height: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mac-control {
+  position: relative;
+  width: 12px;
+  height: 12px;
+  border: 0;
+  border-radius: 999px;
+  padding: 0;
+  cursor: pointer;
+  background:
+    radial-gradient(circle at 34% 28%, rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.24) 22%, transparent 42%),
+    linear-gradient(145deg, rgba(255, 255, 255, 0.24), rgba(0, 0, 0, 0.16)),
+    var(--control-color);
+  box-shadow:
+    0 0 0 0.5px rgba(0, 0, 0, 0.22),
+    0 1px 2px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.42),
+    inset 0 -1px 1px rgba(0, 0, 0, 0.18);
+  transform: translateZ(0);
+  will-change: transform, box-shadow, filter;
+}
+
+.mac-control:hover,
+.mac-control:focus-visible {
+  box-shadow:
+    0 0 0 0.5px rgba(0, 0, 0, 0.22),
+    0 0 16px color-mix(in srgb, var(--control-color), transparent 35%),
+    0 3px 10px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    inset 0 -1px 1px rgba(0, 0, 0, 0.18);
+}
+
+.mac-control-close:disabled {
+  cursor: default;
+  opacity: 0.86;
+  filter: saturate(1.12);
+  animation: red-shutdown-pulse 1.2s ease-in-out infinite;
+}
+
+.mac-control:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.78);
+  outline-offset: 3px;
+}
+
+.mac-control-icon {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 1;
+  color: rgba(37, 31, 31, 0.72);
+  filter: drop-shadow(0 0.5px 0 rgba(255, 255, 255, 0.26));
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(0.72);
+  transition:
+    opacity 0.16s ease,
+    transform 0.16s ease;
+}
+
+.mac-control.is-active .mac-control-icon,
+.mac-control:hover .mac-control-icon,
+.mac-control:focus-visible .mac-control-icon,
+.mac-control:active .mac-control-icon {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+@keyframes red-shutdown-pulse {
+  0%, 100% {
+    box-shadow:
+      0 0 0 0.5px rgba(0, 0, 0, 0.22),
+      0 0 10px rgba(255, 95, 87, 0.28),
+      0 1px 2px rgba(0, 0, 0, 0.22),
+      inset 0 1px 0 rgba(255, 255, 255, 0.42),
+      inset 0 -1px 1px rgba(0, 0, 0, 0.18);
+  }
+  50% {
+    box-shadow:
+      0 0 0 0.5px rgba(0, 0, 0, 0.22),
+      0 0 22px rgba(255, 95, 87, 0.62),
+      0 4px 12px rgba(0, 0, 0, 0.24),
+      inset 0 1px 0 rgba(255, 255, 255, 0.5),
+      inset 0 -1px 1px rgba(0, 0, 0, 0.18);
+  }
+}
+
+.mac-control-shine {
+  position: absolute;
+  inset: 2px 3px auto 3px;
+  height: 4px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0));
+  pointer-events: none;
+}
+
+.mac-control-tooltip {
+  position: absolute;
+  top: 23px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  padding: 5px 8px;
+  border-radius: 7px;
+  background: rgba(20, 20, 22, 0.72);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.24);
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1;
+  text-shadow: none;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+@media (max-width: 640px), (hover: none) {
+  .mac-control-tooltip {
+    display: none;
+  }
+
+  .mac-window-controls {
+    background: transparent;
+    border-color: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mac-control {
+    will-change: auto;
+  }
+}

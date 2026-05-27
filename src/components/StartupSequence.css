@@ -1,0 +1,56 @@
+.startup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  perspective: 1200px;
+}
+
+.startup-glow {
+  position: absolute;
+  width: 50vw;
+  height: 50vw;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(40, 100, 255, 0.15) 0%, rgba(0,0,0,0) 70%);
+  filter: blur(60px);
+  pointer-events: none;
+}
+
+.startup-logo-container {
+  position: relative;
+  width: clamp(180px, 24vw, 340px);
+  height: clamp(180px, 24vw, 340px);
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: visible;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  will-change: transform, opacity, filter;
+}
+
+.startup-logo-idle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  will-change: transform, filter;
+}
+
+.startup-logo {
+  width: clamp(180px, 24vw, 340px) !important;
+  height: clamp(180px, 24vw, 340px) !important;
+  opacity: 0.9;
+  object-fit: contain;
+}
+
+

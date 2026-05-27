@@ -1,0 +1,41 @@
+/* ── InlineEdit Wrapper ─────────────────────────────────────── */
+.ie-wrapper {
+  position: relative;
+  isolation: isolate;
+}
+
+.ie-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 10px 5px 8px;
+  border: none;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #6366f1cc, #8b5cf6cc);
+  backdrop-filter: blur(12px);
+  color: white;
+  font-size: 0.72rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(99, 102, 241, 0.45);
+  letter-spacing: 0.02em;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+
+.ie-btn:hover {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  box-shadow: 0 6px 22px rgba(99, 102, 241, 0.6);
+}
+
+/* admin mode glow ring on hover */
+.ie-wrapper:hover > *:first-child {
+  outline: 1.5px solid rgba(99, 102, 241, 0.5);
+  outline-offset: 2px;
+  border-radius: inherit;
+  transition: outline 0.2s;
+}

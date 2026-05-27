@@ -1,0 +1,99 @@
+.window-header {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  padding: 0 20px;
+  position: relative;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0.06)),
+    rgba(13, 20, 17, 0.34);
+  backdrop-filter: blur(30px) saturate(1.22);
+  -webkit-backdrop-filter: blur(30px) saturate(1.22);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+  transition: opacity 0.35s ease, backdrop-filter 0.35s ease, background 0.35s ease;
+}
+
+.window-controls {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.control-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: inset 0 0 0 0.5px rgba(0, 0, 0, 0.16);
+}
+
+.control-dot.close { background-color: #ff5f56; }
+.control-dot.minimize { background-color: #ffbd2e; }
+.control-dot.maximize { background-color: #27c93f; }
+
+/* Let Navbar share the header space, we'll position Navbar inside WindowFrame or as a sibling in App */
+
+.window-admin-icon {
+  position: absolute;
+  right: 20px;
+  color: var(--text-soft);
+  opacity: 0.82;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.window-admin-icon:hover {
+  opacity: 1;
+  transform: rotate(15deg);
+}
+
+.mac-window-focus .window-header {
+  opacity: 0.72;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04)),
+    rgba(13, 20, 17, 0.28);
+}
+
+.mac-window-fullscreen {
+  backdrop-filter: blur(26px) saturate(1.08);
+  -webkit-backdrop-filter: blur(26px) saturate(1.08);
+}
+
+.mac-window-fullscreen .window-content {
+  transform: scale(1.006) translateZ(0);
+}
+
+@media (max-width: 640px), (prefers-reduced-motion: reduce) {
+  .mac-window-fullscreen .window-content {
+    transform: none;
+  }
+}
+
+@media (max-width: 1080px) {
+  .window-header {
+    padding: 0 14px;
+  }
+
+  .window-controls {
+    flex: 0 0 auto;
+  }
+
+  .window-admin-icon {
+    right: 14px;
+  }
+}
+
+@media (max-width: 640px) {
+  .window-header {
+    height: 58px;
+    padding: 0 10px;
+  }
+
+  .window-admin-icon {
+    right: 10px;
+  }
+}
