@@ -16,7 +16,7 @@ const Hero = () => {
   };
 
   const content = (
-    <div style={{ display: 'flex', width: '100%', gap: '2rem', flexWrap: 'wrap' }}>
+    <div className="hero-content-wrapper">
       <div className="hero-content">
         <h2 className="greeting">Hello, I'm</h2>
         <h1 className="name text-gradient">{heroData.name || 'Yadlapalli Aditya Ram.'}</h1>

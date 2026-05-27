@@ -7,6 +7,14 @@
   margin: 0 auto;
 }
 
+.hero-content-wrapper {
+  display: flex;
+  width: 100%;
+  gap: 2rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
 .hero-content {
   flex: 1;
   min-width: 0;
@@ -88,17 +96,20 @@
 
 @media (max-width: 768px) {
   .hero-section {
-    flex-direction: column;
+    padding: 28px 0 42px;
+  }
+  .hero-content-wrapper {
+    flex-direction: column-reverse;
     text-align: center;
     gap: 28px;
-    padding: 28px 0 42px;
   }
   .greeting {
     font-size: 1.1rem;
   }
   .name {
-    font-size: 3.5rem;
-    overflow-wrap: anywhere;
+    font-size: 3rem;
+    word-break: keep-all;
+    overflow-wrap: normal;
   }
   .role {
     font-size: 1.18rem;

@@ -456,7 +456,7 @@ body.system-shutdown-active .particles-container {
   .btn-primary,
   .btn-secondary {
     max-width: 100%;
-    white-space: normal;
+    white-space: nowrap;
     text-align: center;
   }
 }
