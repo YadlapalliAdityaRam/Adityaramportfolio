@@ -67,6 +67,7 @@ const AdminLoginModal = ({ isOpen, onClose }) => {
                   onChange={(e) => setEmail(e.target.value)}
                   required
                   autoFocus
+                  autoComplete="username"
                 />
               </div>
 
@@ -78,6 +79,7 @@ const AdminLoginModal = ({ isOpen, onClose }) => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
+                  autoComplete="current-password"
                 />
                 <button
                   type="button"
