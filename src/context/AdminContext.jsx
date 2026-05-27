@@ -11,8 +11,8 @@ const apiUrl = (path) => `${API_BASE_URL}${path}`;
 
 const DEFAULT_DATA = {
   hero: {
-    name: '[Admin to fill]',
-    title: '[Admin to fill]',
+    name: 'Yadlapalli Aditya Ram',
+    title: 'Full Stack Developer',
     description: '[Admin to fill]',
     photoUrl: ''
   },

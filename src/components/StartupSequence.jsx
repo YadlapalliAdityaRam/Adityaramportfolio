@@ -314,7 +314,7 @@ const StartupSequence = ({ onComplete }) => {
 
           {/* Welcome text — positioned below bar via margin */}
           <div className={`su-text${textShow ? ' show' : ''}`} style={{ position: 'relative', marginTop: '28px' }}>
-            <span className="su-text-primary">Welcome to Aditya Ram's Portfolio</span>
+            <span className="su-text-primary">Welcome to Yadlapalli Aditya Ram's Portfolio</span>
             <span className="su-text-secondary">Engineering excellence · Web &amp; Beyond</span>
           </div>
         </div>
