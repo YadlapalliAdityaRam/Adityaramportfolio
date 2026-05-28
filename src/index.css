@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@100;200;300&display=swap');
 
 :root {
+  color-scheme: dark;
   --canvas: #0d1712;
   --aluminum: rgba(245, 245, 247, 0.16);
   --surface: rgba(255, 255, 255, 0.1);
@@ -21,6 +22,7 @@
 }
 
 [data-theme='light'] {
+  color-scheme: light;
   --canvas: #f0f2f5;
   --aluminum: rgba(0, 0, 0, 0.05);
   --surface: rgba(255, 255, 255, 0.6);
@@ -312,7 +314,7 @@ a {
 
 /* Utilities */
 .text-gradient {
-  background: linear-gradient(135deg, var(--heading-color), #E5E5EA 46%, var(--primary-accent));
+  background: linear-gradient(135deg, var(--heading-color), var(--text-dark) 46%, var(--primary-accent));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
