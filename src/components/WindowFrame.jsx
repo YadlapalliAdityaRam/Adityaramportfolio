@@ -16,17 +16,29 @@ const WindowFrame = ({ children, activeTab, setActiveTab }) => {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isAdminPanelOpen, setIsAdminPanelOpen] = useState(false);
   const [isFocusMode, setIsFocusMode] = useState(false);
-  const [isFullscreenMode, setIsFullscreenMode] = useState(false);
+  const [isDesktopMode, setIsDesktopMode] = useState(false);
   const dragControls = useDragControls();
 
   React.useEffect(() => {
     document.body.classList.toggle('mac-focus-mode', isFocusMode);
-    document.body.classList.toggle('mac-fullscreen-mode', isFullscreenMode);
+    document.body.classList.toggle('desktop-mode', isDesktopMode);
+
+    const meta = document.querySelector('meta[name="viewport"]');
+    if (meta) {
+      if (isDesktopMode) {
+        meta.setAttribute('content', 'width=1280, initial-scale=0.3, shrink-to-fit=no');
+      } else {
+        meta.setAttribute('content', 'width=device-width, initial-scale=1.0');
+      }
+    }
 
     return () => {
-      document.body.classList.remove('mac-focus-mode', 'mac-fullscreen-mode');
+      document.body.classList.remove('mac-focus-mode', 'desktop-mode');
+      if (meta) {
+        meta.setAttribute('content', 'width=device-width, initial-scale=1.0');
+      }
     };
-  }, [isFocusMode, isFullscreenMode]);
+  }, [isFocusMode, isDesktopMode]);
 
   const handleCloseExperience = () => {
     if (isAdminPanelOpen) {
@@ -55,24 +67,14 @@ const WindowFrame = ({ children, activeTab, setActiveTab }) => {
     setIsFocusMode(mode => !mode);
   }, []);
 
-  const toggleFullscreenMode = React.useCallback(async () => {
-    setIsFullscreenMode(mode => !mode);
-
-    try {
-      if (!document.fullscreenElement && document.documentElement.requestFullscreen) {
-        await document.documentElement.requestFullscreen();
-      } else if (document.fullscreenElement && document.exitFullscreen) {
-        await document.exitFullscreen();
-      }
-    } catch {
-      // Browser fullscreen can be blocked; the cinematic in-app mode still applies.
-    }
+  const toggleDesktopMode = React.useCallback(() => {
+    setIsDesktopMode(mode => !mode);
   }, []);
 
   return (
     <motion.div 
-      className={`glass app-container ${isFocusMode ? 'mac-window-focus' : ''} ${isFullscreenMode ? 'mac-window-fullscreen' : ''}`}
-      drag={!isFullscreenMode}
+      className={`glass app-container ${isFocusMode ? 'mac-window-focus' : ''} ${isDesktopMode ? 'mac-window-desktop' : ''}`}
+      drag={true}
       dragControls={dragControls}
       dragListener={false}
       dragMomentum={false}
@@ -85,16 +87,16 @@ const WindowFrame = ({ children, activeTab, setActiveTab }) => {
       <div 
         className="window-header"
         onPointerDown={(e) => {
-          if (!isFullscreenMode) dragControls.start(e);
+          dragControls.start(e);
         }}
-        style={{ cursor: isFullscreenMode ? 'default' : 'grab', touchAction: 'none' }}
+        style={{ cursor: 'grab', touchAction: 'none' }}
       >
         <MacWindowControls
           onClose={handleCloseExperience}
           focusMode={isFocusMode}
           onToggleFocus={toggleFocusMode}
-          fullscreenMode={isFullscreenMode}
-          onToggleFullscreen={toggleFullscreenMode}
+          desktopMode={isDesktopMode}
+          onToggleDesktop={toggleDesktopMode}
         />
         <Navbar activeTab={activeTab} setActiveTab={setActiveTab} />
         <AdminToolbar />

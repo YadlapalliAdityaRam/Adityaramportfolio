@@ -152,12 +152,12 @@
 }
 
 @media (max-width: 720px) {
-  .dock-container {
+  body:not(.desktop-mode) .dock-container {
     bottom: 12px;
     padding: 0 10px;
   }
 
-  .dock {
+  body:not(.desktop-mode) .dock {
     gap: 7px;
     padding: 9px 10px 11px;
     max-width: calc(100vw - 20px);
@@ -166,16 +166,16 @@
     scrollbar-width: none;
   }
 
-  .dock::-webkit-scrollbar {
+  body:not(.desktop-mode) .dock::-webkit-scrollbar {
     display: none;
   }
 
-  .dock-item {
+  body:not(.desktop-mode) .dock-item {
     width: 42px;
     height: 42px;
   }
 
-  .dock-label {
+  body:not(.desktop-mode) .dock-label {
     display: none;
   }
 }

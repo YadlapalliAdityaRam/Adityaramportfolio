@@ -95,31 +95,31 @@
 }
 
 @media (max-width: 768px) {
-  .hero-section {
+  body:not(.desktop-mode) .hero-section {
     padding: 28px 0 42px;
   }
-  .hero-content-wrapper {
+  body:not(.desktop-mode) .hero-content-wrapper {
     flex-direction: column-reverse;
     text-align: center;
     gap: 28px;
   }
-  .greeting {
+  body:not(.desktop-mode) .greeting {
     font-size: 1.1rem;
   }
-  .name {
+  body:not(.desktop-mode) .name {
     font-size: 3rem;
     word-break: keep-all;
     overflow-wrap: normal;
   }
-  .role {
+  body:not(.desktop-mode) .role {
     font-size: 1.18rem;
     margin-bottom: 18px;
   }
-  .description {
+  body:not(.desktop-mode) .description {
     font-size: 1rem;
     margin-bottom: 24px;
   }
-  .hero-image-container {
+  body:not(.desktop-mode) .hero-image-container {
     width: min(280px, 100%);
     height: min(280px, 78vw);
     min-height: 0;
@@ -127,11 +127,11 @@
 }
 
 @media (max-width: 420px) {
-  .hero-section {
+  body:not(.desktop-mode) .hero-section {
     padding-top: 18px;
   }
 
-  .name {
+  body:not(.desktop-mode) .name {
     font-size: 2.75rem;
   }
 }

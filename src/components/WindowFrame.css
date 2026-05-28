@@ -92,12 +92,12 @@
 }
 
 @media (max-width: 640px) {
-  .window-header {
+  body:not(.desktop-mode) .window-header {
     height: 58px;
     padding: 0 10px;
   }
 
-  .window-admin-icon {
+  body:not(.desktop-mode) .window-admin-icon {
     right: 10px;
   }
 }

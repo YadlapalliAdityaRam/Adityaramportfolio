@@ -72,17 +72,17 @@
 }
 
 @media (max-width: 640px) {
-  .navbar {
+  body:not(.desktop-mode) .navbar {
     margin-left: 8px;
     margin-right: 8px;
   }
 
-  .nav-list {
+  body:not(.desktop-mode) .nav-list {
     gap: 5px;
     padding: 3px;
   }
 
-  .nav-link {
+  body:not(.desktop-mode) .nav-link {
     font-size: 0.78rem;
     padding: 6px 11px;
   }

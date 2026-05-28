@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Expand, Minus, X } from 'lucide-react';
+import { Monitor, Minus, X } from 'lucide-react';
 import { useSystemExperience } from '../../context/SystemExperienceContext';
 import './MacWindowControls.css';
 
 const controls = [
   { id: 'close', label: 'Close', color: '#ff5f57', Icon: X },
   { id: 'focus', label: 'Focus Mode', color: '#febc2e', Icon: Minus },
-  { id: 'fullscreen', label: 'Fullscreen', color: '#28c840', Icon: Expand },
+  { id: 'desktop', label: 'Desktop Mode', color: '#28c840', Icon: Monitor },
 ];
 
 const buttonVariants = {
@@ -32,7 +32,7 @@ const tooltipVariants = {
   visible: { opacity: 1, y: 0, scale: 1 },
 };
 
-const MacWindowControls = ({ onClose, focusMode, onToggleFocus, fullscreenMode, onToggleFullscreen }) => {
+const MacWindowControls = ({ onClose, focusMode, onToggleFocus, desktopMode, onToggleDesktop }) => {
   const [hovered, setHovered] = useState(null);
   const { isShuttingDown, triggerShutdown } = useSystemExperience();
 
@@ -43,7 +43,7 @@ const MacWindowControls = ({ onClose, focusMode, onToggleFocus, fullscreenMode, 
       if (isTyping) return;
 
       if (event.key === 'Escape') {
-        if (fullscreenMode) onToggleFullscreen?.();
+        if (desktopMode) onToggleDesktop?.();
         if (focusMode) onToggleFocus?.();
       }
 
@@ -53,8 +53,8 @@ const MacWindowControls = ({ onClose, focusMode, onToggleFocus, fullscreenMode, 
         triggerShutdown();
       }
 
-      if (event.key.toLowerCase() === 'f') {
-        onToggleFullscreen?.();
+      if (event.key.toLowerCase() === 'd') {
+        onToggleDesktop?.();
       }
 
       if (event.key.toLowerCase() === 'm') {
@@ -64,7 +64,7 @@ const MacWindowControls = ({ onClose, focusMode, onToggleFocus, fullscreenMode, 
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [focusMode, fullscreenMode, onClose, onToggleFocus, onToggleFullscreen, triggerShutdown]);
+  }, [focusMode, desktopMode, onClose, onToggleFocus, onToggleDesktop, triggerShutdown]);
 
   const handleClick = (id) => {
     if (id === 'close') {
@@ -73,11 +73,11 @@ const MacWindowControls = ({ onClose, focusMode, onToggleFocus, fullscreenMode, 
       triggerShutdown();
     }
     if (id === 'focus') onToggleFocus?.();
-    if (id === 'fullscreen') onToggleFullscreen?.();
+    if (id === 'desktop') onToggleDesktop?.();
   };
 
   const getPressed = (id) =>
-    (id === 'focus' && focusMode) || (id === 'fullscreen' && fullscreenMode);
+    (id === 'focus' && focusMode) || (id === 'desktop' && desktopMode);
 
   const getActive = (id) =>
     hovered === id || getPressed(id) || (id === 'close' && isShuttingDown);

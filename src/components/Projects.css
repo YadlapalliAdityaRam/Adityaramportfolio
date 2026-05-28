@@ -34,7 +34,7 @@
 }
 
 @media (max-width: 768px) {
-  .project-card-description {
+  body:not(.desktop-mode) .project-card-description {
     max-height: 120px;
   }
 }

@@ -155,17 +155,17 @@
 }
 
 @media (max-width: 768px) {
-  .projects-section {
+  body:not(.desktop-mode) .projects-section {
     padding: 24px 0;
   }
 
-  .projects-header {
+  body:not(.desktop-mode) .projects-header {
     align-items: flex-start;
     flex-direction: column;
     gap: 14px;
   }
 
-  .project-card:hover {
+  body:not(.desktop-mode) .project-card:hover {
     transform: none;
   }
 }

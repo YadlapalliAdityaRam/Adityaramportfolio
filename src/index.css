@@ -433,15 +433,15 @@ body.system-shutdown-active .particles-container {
 }
 
 @media (max-width: 768px) {
-  .app-background {
+  body:not(.desktop-mode) .app-background {
     background-attachment: scroll;
   }
 
-  .app-foreground {
+  body:not(.desktop-mode) .app-foreground {
     align-items: stretch;
   }
 
-  .app-container {
+  body:not(.desktop-mode) .app-container {
     width: 100vw;
     height: 100dvh;
     max-width: none;
@@ -450,20 +450,20 @@ body.system-shutdown-active .particles-container {
     border-right: 0;
   }
 
-  .window-content {
+  body:not(.desktop-mode) .window-content {
     padding: 0;
   }
 
-  .lenis-content {
+  body:not(.desktop-mode) .lenis-content {
     padding: 140px 14px 112px;
   }
 
-  .glass-card:hover {
+  body:not(.desktop-mode) .glass-card:hover {
     transform: none;
   }
 
-  .btn-primary,
-  .btn-secondary {
+  body:not(.desktop-mode) .btn-primary,
+  body:not(.desktop-mode) .btn-secondary {
     max-width: 100%;
     white-space: nowrap;
     text-align: center;
@@ -471,10 +471,10 @@ body.system-shutdown-active .particles-container {
 }
 
 @media (max-width: 420px) {
-  .window-content {
+  body:not(.desktop-mode) .window-content {
     padding: 0;
   }
-  .lenis-content {
+  body:not(.desktop-mode) .lenis-content {
     padding: 120px 10px 104px;
   }
 }

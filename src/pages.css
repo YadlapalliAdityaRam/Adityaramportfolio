@@ -157,28 +157,29 @@
 }
 
 @media (max-width: 768px) {
-  .page-container {
+  body:not(.desktop-mode) .page-container {
     padding: 16px 16px 140px 16px; /* Side padding + bottom padding to clear dock */
   }
 
-  .page-header {
+  body:not(.desktop-mode) .page-header {
     margin-bottom: 24px;
   }
 
-  .page-title {
+  body:not(.desktop-mode) .page-title {
     font-size: 2rem;
   }
 
-  .page-subtitle {
+  body:not(.desktop-mode) .page-subtitle {
     font-size: 0.95rem;
   }
 
-  .page-two-col, .page-sidebar-layout {
+  body:not(.desktop-mode) .page-two-col, 
+  body:not(.desktop-mode) .page-sidebar-layout {
     flex-direction: column;
     gap: 22px;
   }
 
-  .page-sidebar {
+  body:not(.desktop-mode) .page-sidebar {
     width: 100%;
     flex-direction: row;
     overflow-x: auto;
@@ -187,54 +188,54 @@
     -webkit-overflow-scrolling: touch;
   }
 
-  .page-sidebar::-webkit-scrollbar {
+  body:not(.desktop-mode) .page-sidebar::-webkit-scrollbar {
     display: none;
   }
 
-  .sidebar-item {
+  body:not(.desktop-mode) .sidebar-item {
     flex: 0 0 auto;
     white-space: nowrap;
   }
 
-  .page-grid {
+  body:not(.desktop-mode) .page-grid {
     grid-template-columns: 1fr;
     gap: 18px;
   }
 
-  .timeline {
+  body:not(.desktop-mode) .timeline {
     padding-left: 14px;
     gap: 18px;
   }
 
-  .timeline-item {
+  body:not(.desktop-mode) .timeline-item {
     overflow-wrap: anywhere;
   }
 
-  .timeline-item > div {
+  body:not(.desktop-mode) .timeline-item > div {
     flex-direction: column !important;
     gap: 12px !important;
   }
 
-  .timeline-item > div > div {
+  body:not(.desktop-mode) .timeline-item > div > div {
     min-width: 0 !important;
   }
 
-  .glass-card {
+  body:not(.desktop-mode) .glass-card {
     overflow-wrap: anywhere;
   }
 
-  .scrollable-section {
+  body:not(.desktop-mode) .scrollable-section {
     max-height: none;
     overflow: visible;
   }
 }
 
 @media (max-width: 420px) {
-  .page-title {
+  body:not(.desktop-mode) .page-title {
     font-size: 1.75rem;
   }
 
-  .page-container {
+  body:not(.desktop-mode) .page-container {
     padding: 12px 0;
   }
 }
