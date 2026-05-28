@@ -5,10 +5,8 @@ const AdminContext = createContext();
 
 export const useAdmin = () => useContext(AdminContext);
 
-const API_ENABLED = import.meta.env.VITE_API_ENABLED !== 'false'; // Default to true unless explicitly disabled
-export const API_BASE_URL = import.meta.env.PROD 
-  ? '' // In production, frontend is served by backend, so use relative paths
-  : (import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000').replace(/\/$/, '');
+const API_ENABLED = import.meta.env.VITE_API_ENABLED !== 'false';
+export const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000').replace(/\/$/, '');
 export const apiUrl = (path) => `${API_BASE_URL}${path}`;
 
 const DEFAULT_DATA = {
