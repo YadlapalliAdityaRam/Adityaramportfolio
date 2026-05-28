@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion, useDragControls } from 'framer-motion';
 import './WindowFrame.css';
 import Navbar from './Navbar';
 import { Settings } from 'lucide-react';
@@ -16,6 +17,7 @@ const WindowFrame = ({ children, activeTab, setActiveTab }) => {
   const [isAdminPanelOpen, setIsAdminPanelOpen] = useState(false);
   const [isFocusMode, setIsFocusMode] = useState(false);
   const [isFullscreenMode, setIsFullscreenMode] = useState(false);
+  const dragControls = useDragControls();
 
   React.useEffect(() => {
     document.body.classList.toggle('mac-focus-mode', isFocusMode);
@@ -68,12 +70,25 @@ const WindowFrame = ({ children, activeTab, setActiveTab }) => {
   }, []);
 
   return (
-    <div className={`glass app-container ${isFocusMode ? 'mac-window-focus' : ''} ${isFullscreenMode ? 'mac-window-fullscreen' : ''}`}>
+    <motion.div 
+      className={`glass app-container ${isFocusMode ? 'mac-window-focus' : ''} ${isFullscreenMode ? 'mac-window-fullscreen' : ''}`}
+      drag={!isFullscreenMode}
+      dragControls={dragControls}
+      dragListener={false}
+      dragMomentum={false}
+      dragElastic={0.1}
+    >
       <AdminLoginModal isOpen={isLoginOpen} onClose={() => setIsLoginOpen(false)} />
       <AdminPanel isOpen={isAdminPanelOpen} onClose={() => setIsAdminPanelOpen(false)} />
 
       {/* Window Controls Header */}
-      <div className="window-header">
+      <div 
+        className="window-header"
+        onPointerDown={(e) => {
+          if (!isFullscreenMode) dragControls.start(e);
+        }}
+        style={{ cursor: isFullscreenMode ? 'default' : 'grab', touchAction: 'none' }}
+      >
         <MacWindowControls
           onClose={handleCloseExperience}
           focusMode={isFocusMode}
@@ -84,7 +99,7 @@ const WindowFrame = ({ children, activeTab, setActiveTab }) => {
         <Navbar activeTab={activeTab} setActiveTab={setActiveTab} />
         <AdminToolbar />
         {!isLoggedIn && (
-          <div className="window-admin-icon" onClick={() => setIsLoginOpen(true)} title="Admin Login">
+          <div className="window-admin-icon" onClick={(e) => { e.stopPropagation(); setIsLoginOpen(true); }} title="Admin Login">
             <Settings size={16} />
           </div>
         )}
@@ -98,7 +113,7 @@ const WindowFrame = ({ children, activeTab, setActiveTab }) => {
           </SmoothScroll>
         </GenieTransition>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
