@@ -34,7 +34,7 @@ const Achievements = () => {
   return (
     <div className="page-container" id="achievements">
       <div className="page-header">
-        <h2 className="page-title">My Achievements</h2>
+        <h2 className="page-title">Achievements</h2>
         <p className="page-subtitle">Milestones that keep me motivated.</p>
       </div>
 

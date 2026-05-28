@@ -51,7 +51,7 @@ const Skills = () => {
   return (
     <div className="page-container" id="skills">
       <div className="page-header">
-        <h2 className="page-title">My Skills</h2>
+        <h2 className="page-title">Skills</h2>
         <p className="page-subtitle">Technologies and tools I work with.</p>
       </div>
 

@@ -210,8 +210,12 @@ a {
 /* Inner content scrolling */
 .window-content {
   flex: 1;
-  overflow-y: auto;
-  padding: 108px 48px 120px 48px; /* Top Right Bottom Left (Top accounts for absolute header) */
+  position: relative;
+  overflow: hidden;
+}
+
+.lenis-content {
+  padding: 108px 48px 120px 48px;
 }
 
 .window-content::-webkit-scrollbar,
@@ -447,7 +451,11 @@ body.system-shutdown-active .particles-container {
   }
 
   .window-content {
-    padding: 82px 14px 112px;
+    padding: 0;
+  }
+
+  .lenis-content {
+    padding: 140px 14px 112px;
   }
 
   .glass-card:hover {
@@ -464,6 +472,9 @@ body.system-shutdown-active .particles-container {
 
 @media (max-width: 420px) {
   .window-content {
-    padding: 76px 10px 104px;
+    padding: 0;
+  }
+  .lenis-content {
+    padding: 120px 10px 104px;
   }
 }

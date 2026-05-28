@@ -44,7 +44,7 @@ const Education = () => {
   return (
     <div className="page-container" id="education">
       <div className="page-header">
-        <h2 className="page-title">My Education</h2>
+        <h2 className="page-title">Education</h2>
         <p className="page-subtitle">My academic journey and qualifications.</p>
       </div>
 

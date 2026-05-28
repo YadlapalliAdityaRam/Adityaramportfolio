@@ -33,7 +33,7 @@ const Certifications = () => {
   return (
     <div className="page-container" id="certifications">
       <div className="page-header">
-        <h2 className="page-title">My Certifications</h2>
+        <h2 className="page-title">Certifications</h2>
         <p className="page-subtitle">Continuous learning and growth.</p>
       </div>
 

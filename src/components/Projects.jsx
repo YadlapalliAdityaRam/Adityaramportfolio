@@ -67,7 +67,7 @@ const Projects = () => {
   return (
     <div className="page-container" id="projects">
       <div className="page-header">
-        <h2 className="page-title">My Projects</h2>
+        <h2 className="page-title">Projects</h2>
         <p className="page-subtitle">Things I've built with passion.</p>
       </div>
 

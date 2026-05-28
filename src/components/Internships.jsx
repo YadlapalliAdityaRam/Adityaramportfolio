@@ -33,7 +33,7 @@ const Internships = () => {
   return (
     <div className="page-container" id="internships">
       <div className="page-header">
-        <h2 className="page-title">My Internships</h2>
+        <h2 className="page-title">Internships</h2>
         <p className="page-subtitle">Professional experience and learnings.</p>
       </div>
 

@@ -7,7 +7,7 @@ const { notifyVisit, notifyEmail, contactSubmit } = require('../controllers/noti
 // Rate limiters
 const visitLimiter = rateLimit({
   windowMs: 60 * 60 * 1000, // 1 hour
-  max: 5, // limit each IP to 5 visit notifications per hour
+  max: 50, // limit each IP to 50 visit notifications per hour
   message: { success: false, message: 'Too many visit requests' }
 });
 
