@@ -84,7 +84,7 @@ const Projects = () => {
         ))}
       </div>
 
-      <motion.div className="page-grid scrollable-section" layout>
+      <motion.div className="page-grid" layout>
         {projects.length === 0 && !isLoggedIn && (
           <p style={{ color: 'var(--text-muted)' }}>No projects available yet.</p>
         )}

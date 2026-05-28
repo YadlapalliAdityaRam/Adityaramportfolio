@@ -37,7 +37,7 @@ const Internships = () => {
         <p className="page-subtitle">Professional experience and learnings.</p>
       </div>
 
-      <div className="page-two-col scrollable-section">
+      <div className="page-two-col">
         {/* Left Column: Timeline */}
         <div className="page-col-left">
           <div className="timeline">
