@@ -18,6 +18,7 @@ import DynamicPage from './pages/DynamicPage';
 import { SystemExperienceProvider, useSystemExperience } from './context/SystemExperienceContext';
 import SystemShutdownOverlay from './components/SystemShutdownOverlay';
 import { useAdmin, apiUrl } from './context/AdminContext';
+import { Analytics } from '@vercel/analytics/react';
 
 const backgrounds = {
   home: {
@@ -210,6 +211,7 @@ function App() {
   return (
     <SystemExperienceProvider>
       <PortfolioExperience />
+      <Analytics />
     </SystemExperienceProvider>
   );
 }
