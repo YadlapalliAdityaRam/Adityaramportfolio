@@ -132,7 +132,7 @@ function GeniePage({ children, enterPolys, enterTimes, direction, target, transf
 
       const W = window.innerWidth;
       const H = window.innerHeight;
-      const duration = 1100; // 1.1s duration
+      const duration = 600; // 0.6s duration
 
       function cubicBezier(t, x1, y1, x2, y2) {
         function sX(u) { return 3*u*(1-u)*(1-u)*x1 + 3*u*u*(1-u)*x2 + u*u*u; }
@@ -202,7 +202,7 @@ function GeniePage({ children, enterPolys, enterTimes, direction, target, transf
         transformPerspective: 1200,
       }}
       transition={{
-        duration: 1.1,
+        duration: 0.6,
         ease: [0.16, 1, 0.3, 1],
         times: enterTimes,
       }}
@@ -222,7 +222,7 @@ function GeniePage({ children, enterPolys, enterTimes, direction, target, transf
         initial={{ opacity: 0, x: '-110%' }}
         animate={{ opacity: [0, 0.8, 0.8, 0], x: ['-110%', '-110%', '110%', '110%'] }}
         exit={{ opacity: 0 }}
-        transition={{ duration: 0.70, ease: 'linear', times: [0, 0.1, 0.9, 1] }}
+        transition={{ duration: 0.40, ease: 'linear', times: [0, 0.1, 0.9, 1] }}
         style={{
           position: 'absolute',
           inset: 0,
