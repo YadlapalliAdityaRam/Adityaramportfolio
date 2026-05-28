@@ -47,8 +47,10 @@ const Navbar = ({ activeTab, setActiveTab }) => {
             </a>
           </li>
         ))}
+        <li className="nav-item">
+          <ThemeToggle />
+        </li>
       </ul>
-      <ThemeToggle />
     </nav>
   );
 };

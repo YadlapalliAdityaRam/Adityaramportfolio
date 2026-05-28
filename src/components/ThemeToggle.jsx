@@ -23,11 +23,12 @@ const ThemeToggle = () => {
 
   return (
     <button 
-      className="theme-toggle-btn" 
+      className="nav-link theme-toggle-btn" 
       onClick={toggleTheme} 
       title={isLightMode ? "Switch to Dark Mode" : "Switch to Light Mode"}
     >
-      {isLightMode ? <Moon size={16} /> : <Sun size={16} />}
+      <span className="nav-icon">{isLightMode ? <Moon size={16} /> : <Sun size={16} />}</span> 
+      <span className="theme-toggle-text">{isLightMode ? 'Dark' : 'Light'}</span>
     </button>
   );
 };
