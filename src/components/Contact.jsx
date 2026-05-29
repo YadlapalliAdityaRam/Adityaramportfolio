@@ -19,6 +19,7 @@ const Contact = () => {
     message: ''
   });
   const [formStatus, setFormStatus] = useState('');
+  const [status, setStatus] = useState('idle'); // idle, loading, success, error
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSave = async (data) => {
@@ -28,12 +29,14 @@ const Contact = () => {
   const handleMessageChange = (field, value) => {
     setMessageForm(prev => ({ ...prev, [field]: value }));
     setFormStatus('');
+    setStatus('idle');
   };
 
   const handleMessageSubmit = async (e) => {
     e.preventDefault();
 
     setIsSubmitting(true);
+    setStatus('loading');
     setFormStatus('Sending message...');
 
     try {
@@ -46,12 +49,15 @@ const Contact = () => {
       const data = await response.json();
       
       if (response.ok) {
+        setStatus('success');
         setFormStatus('Message sent successfully!');
         setMessageForm({ name: '', email: '', subject: '', message: '' });
       } else {
+        setStatus('error');
         setFormStatus(data.message || data.errors?.[0]?.msg || 'Failed to send message.');
       }
     } catch (err) {
+      setStatus('error');
       setFormStatus('Network error. Please try again later.');
     } finally {
       setIsSubmitting(false);
@@ -155,7 +161,7 @@ const Contact = () => {
               </label>
               
               {formStatus && (
-                <p className={contact.email ? 'contact-message-status success' : 'contact-message-status error'}>{formStatus}</p>
+                <p className={`contact-message-status ${status}`}>{formStatus}</p>
               )}
 
               <button className="btn-primary contact-message-submit" type="submit" disabled={isSubmitting}>

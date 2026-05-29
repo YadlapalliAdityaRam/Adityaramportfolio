@@ -5,7 +5,6 @@ const getBearerToken = (authorization = '') => {
   const [scheme, token] = authorization.split(' ');
   return scheme?.toLowerCase() === 'bearer' && token ? token : null;
 };
-
 const protect = async (req, res, next) => {
   const token = getBearerToken(req.headers.authorization);
 

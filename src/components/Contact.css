@@ -94,9 +94,73 @@
   color: #fecaca;
 }
 
+.contact-message-status.loading {
+  color: var(--text-soft);
+}
+
 .contact-message-submit {
   justify-content: center;
   margin-top: auto;
+}
+
+/* Light Theme Styles */
+[data-theme='light'] .contact-message-card {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.78), rgba(255, 255, 255, 0.58)),
+    var(--card-bg);
+  border-color: var(--glass-border);
+}
+
+[data-theme='light'] .contact-message-title {
+  color: var(--heading-color);
+  text-shadow: none;
+}
+
+[data-theme='light'] .contact-message-field span {
+  color: var(--text-dark);
+  text-shadow: none;
+}
+
+[data-theme='light'] .contact-message-field input,
+[data-theme='light'] .contact-message-field textarea {
+  border-color: var(--glass-border);
+  background: rgba(255, 255, 255, 0.6);
+  color: var(--text-dark);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    0 10px 28px rgba(0, 0, 0, 0.05);
+}
+
+[data-theme='light'] .contact-message-field input::placeholder,
+[data-theme='light'] .contact-message-field textarea::placeholder {
+  color: var(--text-soft);
+}
+
+[data-theme='light'] .contact-message-field input:focus,
+[data-theme='light'] .contact-message-field textarea:focus {
+  border-color: var(--primary-accent);
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow:
+    0 0 0 3px rgba(0, 113, 227, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    0 14px 32px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme='light'] .contact-message-field input:-webkit-autofill,
+[data-theme='light'] .contact-message-field textarea:-webkit-autofill {
+  -webkit-text-fill-color: var(--text-dark);
+}
+
+[data-theme='light'] .contact-message-status {
+  text-shadow: none;
+}
+
+[data-theme='light'] .contact-message-status.success {
+  color: #1e7e34;
+}
+
+[data-theme='light'] .contact-message-status.error {
+  color: #d9534f;
 }
 
 @media (max-width: 768px) {
