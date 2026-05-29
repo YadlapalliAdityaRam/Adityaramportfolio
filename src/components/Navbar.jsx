@@ -9,15 +9,15 @@ const Navbar = ({ activeTab, setActiveTab }) => {
   const { recordNavigation } = useGenie();
 
   const staticNavItems = [
-    { id: 'home',           label: 'Home',           icon: '🏠' },
-    { id: 'education',      label: 'Education',      icon: '🎓' },
-    { id: 'skills',         label: 'Skills',         icon: '⚙️' },
-    { id: 'projects',       label: 'Projects',       icon: '💻' },
-    { id: 'internships',    label: 'Internships',    icon: '💼' },
-    { id: 'achievements',   label: 'Achievements',   icon: '🏆' },
-    { id: 'certifications', label: 'Certifications', icon: '📜' },
-    { id: 'resume',         label: 'Resume',         icon: '📄' },
-    { id: 'contact',        label: 'Contact',        icon: '✉️' },
+    { id: 'home', label: 'Home' },
+    { id: 'education', label: 'Education' },
+    { id: 'skills', label: 'Skills' },
+    { id: 'projects', label: 'Projects' },
+    { id: 'internships', label: 'Internships' },
+    { id: 'achievements', label: 'Achievements' },
+    { id: 'certifications', label: 'Certifications' },
+    { id: 'resume', label: 'Resume' },
+    { id: 'contact', label: 'Contact' },
   ];
 
   const dynamicItems = (pages || [])
