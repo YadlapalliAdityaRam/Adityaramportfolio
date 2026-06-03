@@ -3,7 +3,7 @@ import BrandLogo from './BrandLogo';
 
 // ── Inline CSS ──────────────────────────────────────────────────────────────
 const css = `
-  @import url('https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@100;200;300&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600&display=swap');
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -12,7 +12,7 @@ const css = `
     background: #000;
     display: flex; align-items: center; justify-content: center;
     flex-direction: column;
-    font-family: -apple-system, 'SF Pro Display', 'Helvetica Neue', sans-serif;
+    font-family: -apple-system, 'Inter', 'Helvetica Neue', sans-serif;
     overflow: hidden;
   }
 
@@ -23,7 +23,7 @@ const css = `
       rgba(255,255,255,0.055) 0%,
       rgba(255,255,255,0.018) 40%,
       transparent 70%);
-    opacity: 0; transition: opacity 2.4s ease;
+    opacity: 0; transition: opacity 0.8s ease;
   }
   .su-nebula.show { opacity: 1; }
 
@@ -44,9 +44,9 @@ const css = `
     transform: scale(0.82) translateY(18px);
     filter: blur(14px) brightness(0.4);
     transition:
-      opacity 1.9s cubic-bezier(0.12, 0.82, 0.18, 1),
-      transform 1.9s cubic-bezier(0.12, 0.82, 0.18, 1),
-      filter 1.9s cubic-bezier(0.12, 0.82, 0.18, 1);
+      opacity 0.6s cubic-bezier(0.12, 0.82, 0.18, 1),
+      transform 0.6s cubic-bezier(0.12, 0.82, 0.18, 1),
+      filter 0.6s cubic-bezier(0.12, 0.82, 0.18, 1);
   }
   .su-apple.show {
     opacity: 1; transform: scale(1) translateY(0); filter: blur(0) brightness(1);
@@ -60,7 +60,7 @@ const css = `
     border-radius: 50%;
     background: radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 70%);
     opacity: 0; transform: scale(0.6);
-    transition: opacity 2s ease, transform 2s ease;
+    transition: opacity 0.6s ease, transform 0.6s ease;
     pointer-events: none;
   }
   .su-halo.show { opacity: 1; transform: scale(1); }
@@ -79,7 +79,7 @@ const css = `
     border-radius: 999px;
     overflow: hidden;
     opacity: 0; transform: scaleX(0.6);
-    transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.34,1.56,0.64,1);
+    transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
   }
   .su-bar-track.show { opacity: 1; transform: scaleX(1); }
 
@@ -110,7 +110,7 @@ const css = `
     display: flex; flex-direction: column; align-items: center; gap: 6px;
     opacity: 0; transform: translateY(10px) scale(0.97);
     filter: blur(5px);
-    transition: opacity 1.3s ease, transform 1.3s cubic-bezier(0.16,1,0.3,1), filter 1.3s ease;
+    transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.16,1,0.3,1), filter 0.6s ease;
     text-align: center;
     margin-top: 72px; /* gap from bar */
   }
@@ -135,9 +135,9 @@ const css = `
     opacity: 0;
     transform: scale(1.04);
     filter: blur(10px);
-    transition: opacity 1.2s cubic-bezier(0.22,1,0.36,1),
-                transform 1.2s cubic-bezier(0.22,1,0.36,1),
-                filter 1.2s ease;
+    transition: opacity 0.5s cubic-bezier(0.22,1,0.36,1),
+                transform 0.5s cubic-bezier(0.22,1,0.36,1),
+                filter 0.5s ease;
     pointer-events: none;
   }
 
@@ -227,54 +227,54 @@ const StartupSequence = ({ onComplete }) => {
   useEffect(() => {
     const ts = [];
 
-    // 400ms — logo + nebula appear
+    // 100ms — logo + nebula appear
     ts.push(setTimeout(() => {
       setLogoShow(true);
       setNebulaShow(true);
       setHaloShow(true);
-    }, 400));
+    }, 100));
 
-    // 1400ms — particles on
-    ts.push(setTimeout(() => setParticlesActive(true), 1400));
+    // 400ms — particles on
+    ts.push(setTimeout(() => setParticlesActive(true), 400));
 
-    // 1600ms — idle pulse starts
-    ts.push(setTimeout(() => setLogoPulse(true), 1600));
+    // 500ms — idle pulse starts
+    ts.push(setTimeout(() => setLogoPulse(true), 500));
 
-    // 1800ms — bar appears, starts filling quickly to 15%
+    // 600ms — bar appears, starts filling quickly to 15%
     ts.push(setTimeout(() => {
       setBarShow(true);
       setTimeout(() => {
-        setBarDuration('600ms');
+        setBarDuration('200ms');
         setBarWidth(15);
-      }, 80);
-    }, 1800));
+      }, 40);
+    }, 600));
 
-    // 2400ms — fill to 55% slower
+    // 800ms — fill to 55% slower
     ts.push(setTimeout(() => {
-      setBarDuration('1200ms');
+      setBarDuration('300ms');
       setBarWidth(55);
-    }, 2400));
+    }, 800));
 
-    // 3000ms — text appears
-    ts.push(setTimeout(() => setTextShow(true), 3000));
+    // 1000ms — text appears
+    ts.push(setTimeout(() => setTextShow(true), 1000));
 
-    // 3700ms — fill to 88%
+    // 1100ms — fill to 88%
     ts.push(setTimeout(() => {
-      setBarDuration('900ms');
+      setBarDuration('300ms');
       setBarWidth(88);
-    }, 3700));
+    }, 1100));
 
-    // 4600ms — fill to 100%
+    // 1400ms — fill to 100%
     ts.push(setTimeout(() => {
-      setBarDuration('350ms');
+      setBarDuration('200ms');
       setBarWidth(100);
-    }, 4600));
+    }, 1400));
 
-    // 5100ms — exit
+    // 1600ms — exit
     ts.push(setTimeout(() => {
       setExiting(true);
-      setTimeout(() => onComplete?.(), 1200);
-    }, 5100));
+      setTimeout(() => onComplete?.(), 500);
+    }, 1600));
 
     return () => ts.forEach(clearTimeout);
   }, [onComplete]);
