@@ -52,6 +52,14 @@ export const AdminProvider = ({ children }) => {
   const [token, setToken] = useState(localStorage.getItem('token') || null);
   const [isLoading, setIsLoading] = useState(true);
   const [pages, setPages] = useState([]);
+  const [hasCache] = useState(() => {
+    try {
+      const savedData = localStorage.getItem('portfolioData');
+      return !!savedData;
+    } catch {
+      return false;
+    }
+  });
 
   useEffect(() => {
     if (token) {
@@ -247,6 +255,7 @@ export const AdminProvider = ({ children }) => {
       login,
       logout,
       isLoading,
+      hasCache,
       portfolioData,
       updateSection,
       pages,

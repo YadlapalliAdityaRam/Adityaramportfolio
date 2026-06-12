@@ -111,7 +111,7 @@ function PortfolioExperience() {
   const [activeTab, setActiveTab] = useState('home');
   const [isBooted, setIsBooted] = useState(false);
   const { isShuttingDown } = useSystemExperience();
-  const { pages } = useAdmin();
+  const { pages, isLoading, hasCache } = useAdmin();
   const shouldReduceMotion = useReducedMotion();
   const activeForegroundVariants = shouldReduceMotion ? mobileForegroundVariants : foregroundVariants;
   const activeBackground = getBackgroundForTab(activeTab, pages);
@@ -173,7 +173,13 @@ function PortfolioExperience() {
 
   return (
     <>
-      {!isBooted && <StartupSequence onComplete={() => setIsBooted(true)} />}
+      {!isBooted && (
+        <StartupSequence 
+          isLoading={isLoading} 
+          hasCache={hasCache} 
+          onComplete={() => setIsBooted(true)} 
+        />
+      )}
       
       {/* Dynamic Smooth Backgrounds */}
       {backgroundList.map(([tab, background]) => (

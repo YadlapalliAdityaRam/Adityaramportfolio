@@ -8,5 +8,22 @@ export default defineConfig({
     proxy: {
       '/api': 'http://127.0.0.1:5000'
     }
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            if (id.includes('framer-motion')) {
+              return 'framer-motion';
+            }
+            if (id.includes('lucide-react')) {
+              return 'lucide-react';
+            }
+            return 'vendor';
+          }
+        }
+      }
+    }
   }
 })

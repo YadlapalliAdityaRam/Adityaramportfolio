@@ -42,7 +42,10 @@ const notifyVisit = async (req, res) => {
       <p><strong>Device/Browser:</strong> ${deviceInfo || userAgent}</p>
     `;
 
-    await sendEmail('🚀 New Portfolio Visit', htmlContent);
+    // Send email asynchronously in the background so the HTTP response is not blocked
+    sendEmail('🚀 New Portfolio Visit', htmlContent).catch(err => {
+      console.error('Async sendEmail error in notifyVisit:', err);
+    });
     res.status(200).json({ success: true, message: 'Notification sent' });
   } catch (error) {
     console.error('Notify visit error:', error);

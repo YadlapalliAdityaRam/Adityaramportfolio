@@ -148,6 +148,21 @@ const css = `
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
     background-size: 180px 180px;
   }
+
+  .su-status-text {
+    font-size: clamp(0.72rem, 1.8vw, 0.82rem);
+    font-weight: 300;
+    color: rgba(255,255,255,0.55);
+    letter-spacing: 0.06em;
+    margin-top: 14px;
+    height: 16px;
+    text-align: center;
+    transition: opacity 0.4s ease;
+    opacity: 0;
+  }
+  .su-status-text.show {
+    opacity: 1;
+  }
 `;
 
 
@@ -209,7 +224,7 @@ function useParticles(canvasRef, active) {
 }
 
 // ── Main Component ───────────────────────────────────────────────────────────
-const StartupSequence = ({ onComplete }) => {
+const StartupSequence = ({ onComplete, isLoading = true, hasCache = false }) => {
   const [logoShow, setLogoShow] = useState(false);
   const [logoPulse, setLogoPulse] = useState(false);
   const [haloShow, setHaloShow] = useState(false);
@@ -220,10 +235,39 @@ const StartupSequence = ({ onComplete }) => {
   const [textShow, setTextShow] = useState(false);
   const [exiting, setExiting] = useState(false);
   const [particlesActive, setParticlesActive] = useState(false);
+  
+  // Status message states for waking up server
+  const [statusText, setStatusText] = useState('');
+  const [statusShow, setStatusShow] = useState(false);
+  const [atPausePoint, setAtPausePoint] = useState(false);
+  const [readyToFinish, setReadyToFinish] = useState(() => hasCache || !isLoading);
+  const [triggerFinalStep, setTriggerFinalStep] = useState(false);
+
   const canvasRef = useRef(null);
+  const onCompleteRef = useRef(onComplete);
+
+  useEffect(() => {
+    onCompleteRef.current = onComplete;
+  }, [onComplete]);
 
   useParticles(canvasRef, particlesActive);
 
+  // Sync readyToFinish if isLoading changes
+  useEffect(() => {
+    if (!isLoading) {
+      setReadyToFinish(true);
+    }
+  }, [isLoading]);
+
+  // Safety fallback timeout: force progression after 25s
+  useEffect(() => {
+    const safetyTimer = setTimeout(() => {
+      setReadyToFinish(true);
+    }, 25000);
+    return () => clearTimeout(safetyTimer);
+  }, []);
+
+  // Primary animation timeline up to the 90% pause point
   useEffect(() => {
     const ts = [];
 
@@ -258,26 +302,70 @@ const StartupSequence = ({ onComplete }) => {
     // 3000ms — text appears
     ts.push(setTimeout(() => setTextShow(true), 3000));
 
-    // 3700ms — fill to 88%
+    // 3700ms — fill to 88% (cached) or 90% (uncached)
     ts.push(setTimeout(() => {
       setBarDuration('900ms');
-      setBarWidth(88);
+      setBarWidth(hasCache ? 88 : 90);
     }, 3700));
 
-    // 4600ms — fill to 100%
+    // 4600ms — reached the pause point
     ts.push(setTimeout(() => {
-      setBarDuration('350ms');
-      setBarWidth(100);
+      setAtPausePoint(true);
     }, 4600));
 
-    // 5100ms — exit
-    ts.push(setTimeout(() => {
-      setExiting(true);
-      setTimeout(() => onComplete?.(), 1200);
-    }, 5100));
+    return () => ts.forEach(clearTimeout);
+  }, [hasCache]);
+
+  // Show dynamic status message if we are paused and waiting
+  useEffect(() => {
+    if (atPausePoint && !readyToFinish) {
+      setStatusText('Waking up server...');
+      setStatusShow(true);
+    }
+  }, [atPausePoint, readyToFinish]);
+
+  // Trigger final step when we reach pause point and backend is ready / timeout hits
+  useEffect(() => {
+    if (atPausePoint && readyToFinish) {
+      setTriggerFinalStep(true);
+    }
+  }, [atPausePoint, readyToFinish]);
+
+  // Final animation sequence: 100% fill and exit transition
+  useEffect(() => {
+    if (!triggerFinalStep) return;
+
+    const ts = [];
+
+    if (statusShow) {
+      setStatusText('Connection established');
+      // Briefly show "Connection established" before completing the bar
+      ts.push(setTimeout(() => {
+        setBarDuration('400ms');
+        setBarWidth(100);
+
+        ts.push(setTimeout(() => {
+          setExiting(true);
+          ts.push(setTimeout(() => {
+            onCompleteRef.current?.();
+          }, 1200));
+        }, 400));
+      }, 500));
+    } else {
+      // Direct fast path (e.g. cached or backend already loaded)
+      setBarDuration('350ms');
+      setBarWidth(100);
+
+      ts.push(setTimeout(() => {
+        setExiting(true);
+        ts.push(setTimeout(() => {
+          onCompleteRef.current?.();
+        }, 1200));
+      }, 500));
+    }
 
     return () => ts.forEach(clearTimeout);
-  }, [onComplete]);
+  }, [triggerFinalStep, statusShow]);
 
   return (
     <>
@@ -310,6 +398,11 @@ const StartupSequence = ({ onComplete }) => {
               className="su-bar-fill"
               style={{ width: `${barWidth}%`, transitionDuration: barDuration }}
             />
+          </div>
+
+          {/* Connection status message */}
+          <div className={`su-status-text${statusShow ? ' show' : ''}`}>
+            {statusText}
           </div>
 
           {/* Welcome text — positioned below bar via margin */}
